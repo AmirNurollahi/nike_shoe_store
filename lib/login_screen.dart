@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool textStatus = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,11 +60,19 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               TextField(
-                obscureText: true,
+                obscureText: textStatus,
                 keyboardType: TextInputType.visiblePassword,
                 obscuringCharacter: '*',
                 decoration: InputDecoration(
-                  suffixIcon: Icon(Icons.visibility_off_outlined),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          textStatus = !textStatus;
+                        });
+                      },
+                      icon: Icon(textStatus
+                          ? Icons.visibility
+                          : Icons.visibility_off)),
                   label: Text('Password'),
                   labelStyle: TextStyle(
                     color: Color(0xFFB3B3B3),
