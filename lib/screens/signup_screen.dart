@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nike_shoe_store/screens/begin_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -68,9 +69,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   fixedSize: Size(double.maxFinite, 45),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => BeginScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
                 child: Text(
-                  'Login',
+                  'Sign Up',
                 ),
               ),
               Row(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nike_shoe_store/signup_screen.dart';
+import 'package:nike_shoe_store/screens/begin_screen.dart';
+import 'package:nike_shoe_store/screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -110,7 +111,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   fixedSize: Size(double.maxFinite, 45),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => BeginScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
                 child: Text(
                   'Login',
                 ),

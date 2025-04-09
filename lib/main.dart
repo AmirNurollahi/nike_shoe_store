@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nike_shoe_store/login_screen.dart';
-import 'package:nike_shoe_store/splash_screen.dart';
+import 'package:nike_shoe_store/screens/login_screen.dart';
+import 'package:nike_shoe_store/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
