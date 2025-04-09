@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nike_shoe_store/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Login screen',
+                'Login ',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 26,
@@ -65,14 +66,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscuringCharacter: '*',
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          textStatus = !textStatus;
-                        });
-                      },
-                      icon: Icon(textStatus
-                          ? Icons.visibility
-                          : Icons.visibility_off)),
+                    onPressed: () {
+                      setState(() {
+                        textStatus = !textStatus;
+                      });
+                    },
+                    icon: Icon(
+                        textStatus ? Icons.visibility : Icons.visibility_off),
+                  ),
                   label: Text('Password'),
                   labelStyle: TextStyle(
                     color: Color(0xFFB3B3B3),
@@ -124,7 +125,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextButton.styleFrom(
                       foregroundColor: Color(0xFF2D96FF),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignupScreen(),
+                          ));
+                    },
                     child: Text(
                       'create account',
                     ),
