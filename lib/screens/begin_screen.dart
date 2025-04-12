@@ -9,46 +9,172 @@ class BeginScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       backgroundColor: Color(0xffF5F6FF),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 15,
-        children: [
-          TopIconSection(),
-          SearchBarSection(),
-          BrandSection(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Popular Shoes',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 15,
+          children: [
+            TopIconSection(),
+            SearchBarSection(),
+            BrandSection(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Popular Shoes',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Text(
+                    'View all',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'View all',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 275,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: productList.length,
-              itemBuilder: (context, index) {
-                return popularShoesItem(
-                  index: index,
-                );
-              },
             ),
-          ),
-        ],
+            SizedBox(
+              height: 275,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: productList.length,
+                itemBuilder: (context, index) {
+                  return popularShoesItem(
+                    index: index,
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'New Arrivals',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Text(
+                    'View all',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 275,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: productList.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.only(top: 5, bottom: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: productList[index].bgColor,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Image.asset(
+                            productList[index].image,
+                            width: MediaQuery.of(context).size.width * 0.475,
+                            height: 155,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                productList[index].name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Rewiew',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        productList[index].rating,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.orange,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.orange,
+                                      ),
+                                    ],
+                                  ),
+                                  IconButton(
+                                      style: IconButton.styleFrom(
+                                        backgroundColor: Color(0XFF2D96FF),
+                                      ),
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      )),
+                                ],
+                              ),
+                              Text(
+                                productList[index].price,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     ));
   }
@@ -148,7 +274,7 @@ class popularShoesItem extends StatelessWidget {
                     ))
               ],
             ),
-          )
+          ),
         ],
       ),
     );
