@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nike_shoe_store/model/product_model.dart';
+import 'package:nike_shoe_store/screens/detail_screen.dart';
 
 class BeginScreen extends StatelessWidget {
   const BeginScreen({super.key});
@@ -81,90 +82,101 @@ class BeginScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: productList.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    padding: EdgeInsets.only(top: 5, bottom: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: productList[index].bgColor,
-                            borderRadius: BorderRadius.circular(15),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(
+                              product: productList[index],
+                            ),
+                          ));
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      padding: EdgeInsets.only(top: 5, bottom: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: productList[index].bgColor,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Image.asset(
+                              productList[index].image,
+                              width: MediaQuery.of(context).size.width * 0.475,
+                              height: 155,
+                            ),
                           ),
-                          child: Image.asset(
-                            productList[index].image,
-                            width: MediaQuery.of(context).size.width * 0.475,
-                            height: 155,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                productList[index].name,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Rewiew',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        productList[index].rating,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.orange,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.orange,
-                                      ),
-                                    ],
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  productList[index].name,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
                                   ),
-                                  IconButton(
-                                      style: IconButton.styleFrom(
-                                        backgroundColor: Color(0XFF2D96FF),
-                                      ),
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      )),
-                                ],
-                              ),
-                              Text(
-                                productList[index].price,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
                                 ),
-                              ),
-                            ],
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Rewiew',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          productList[index].rating,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.orange,
+                                        ),
+                                      ],
+                                    ),
+                                    IconButton(
+                                        style: IconButton.styleFrom(
+                                          backgroundColor: Color(0XFF2D96FF),
+                                        ),
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        )),
+                                  ],
+                                ),
+                                Text(
+                                  productList[index].price,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -190,92 +202,103 @@ class popularShoesItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.only(top: 10, bottom: 10),
-      // width: double.maxFinite,
-      width: MediaQuery.of(context).size.width,
-      // height: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
-      ),
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: productList[index].bgColor,
-              borderRadius: BorderRadius.circular(15),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailScreen(
+                product: productList[index],
+              ),
+            ));
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.only(top: 10, bottom: 10),
+        // width: double.maxFinite,
+        width: MediaQuery.of(context).size.width,
+        // height: 200,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.white,
+        ),
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: productList[index].bgColor,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Image.asset(
+                productList[index].image,
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 155,
+              ),
             ),
-            child: Image.asset(
-              productList[index].image,
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: 155,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  spacing: 5,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      productList[index].name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    spacing: 5,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        productList[index].name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Rewiew',
-                          style: TextStyle(
-                            fontSize: 14,
+                      Row(
+                        children: [
+                          Text(
+                            'Rewiew',
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          productList[index].rating,
-                          style: TextStyle(
-                            fontSize: 14,
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            productList[index].rating,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            Icons.star,
                             color: Colors.orange,
-                            fontWeight: FontWeight.bold,
                           ),
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.orange,
-                        ),
-                      ],
-                    ),
-                    Text(
-                      productList[index].price,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: Color(0XFF2D96FF),
-                    ),
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ))
-              ],
+                      Text(
+                        productList[index].price,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                      style: IconButton.styleFrom(
+                        backgroundColor: Color(0XFF2D96FF),
+                      ),
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ))
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
