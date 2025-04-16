@@ -432,27 +432,30 @@ class TopIconSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Card(
-          color: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Image.asset(
-              'assets/images/hugeicons_menu-circle.png',
-              width: 24,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Card(
+            color: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Image.asset(
+                'assets/images/hugeicons_menu-circle.png',
+                width: 24,
+              ),
             ),
           ),
-        ),
-        Card(
-          color: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Icon(Icons.shopping_basket_outlined),
+          Card(
+            color: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Icon(Icons.shopping_basket_outlined),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

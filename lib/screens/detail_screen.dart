@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nike_shoe_store/model/product_model.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({
-    super.key,
-    required this.product,
-  });
+  const DetailScreen({super.key, required this.product});
 
   final Product product;
 
@@ -23,23 +20,39 @@ class _DetailScreenState extends State<DetailScreen> {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas purus viverra accumsan in nisl nisi. Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque. ';
 
     return Scaffold(
+      backgroundColor: Color(0xffF5F6FF),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Detail Screen',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
         backgroundColor: Color(0xffF5F6FF),
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'Detail Screen',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+          ),
+          style: IconButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-          backgroundColor: Color(0xffF5F6FF),
-          leading: IconButton(
+        ),
+        actions: [
+          IconButton(
             onPressed: () {},
             icon: Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.black,
+              Icons.favorite_outline,
+              color: Colors.red,
             ),
             style: IconButton.styleFrom(
               backgroundColor: Colors.white,
@@ -48,91 +61,97 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.favorite_outline,
-                color: Colors.red,
+        ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 10,
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Center(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Text(
+                    'Jordan',
+                    style: TextStyle(
+                        fontSize: 78,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue.shade100,
+                        letterSpacing: 20),
+                  ),
+                  Transform.rotate(
+                    angle: pi / -6,
+                    child: Image.asset(
+                      widget.product.image,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
               ),
-              style: IconButton.styleFrom(
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+            ),
+            Text(
+              widget.product.name,
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            Text(
+              desc,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            Text(
+              'Size',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            sizeSection(value: value),
+            Text(
+              'Gallery',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            Container(
+              height: 120,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.product.gallery.length,
+                itemBuilder: (context, index) => Image.asset(
+                  widget.product.gallery[index],
+                  width: 100,
+                  height: 100,
                 ),
               ),
             ),
           ],
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              SizedBox(
-                height: 30,
-              ),
-              Center(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Text(
-                      'Jordan',
-                      style: TextStyle(
-                          fontSize: 78,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue.shade100,
-                          letterSpacing: 20),
-                    ),
-                    Transform.rotate(
-                      angle: pi / -6,
-                      child: Image.asset(
-                        widget.product.image,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                widget.product.name,
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              Text(
-                desc,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              Text(
-                'Size',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              sizeSection(value: value),
-            ],
-          ),
-        ));
+      ),
+    );
   }
 }
 
 class sizeSection extends StatefulWidget {
   sizeSection({super.key, required this.value});
-
   String value;
 
   @override
@@ -236,7 +255,6 @@ class sizeItem extends StatelessWidget {
     required this.sizeNumber,
     required this.value,
   });
-
   final String sizeNumber;
   final String value;
 
