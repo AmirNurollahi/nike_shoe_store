@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:nike_shoe_store/model/cart_model.dart';
 import 'package:nike_shoe_store/model/product_model.dart';
+import 'package:nike_shoe_store/screens/cart_screen.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.product});
@@ -49,6 +51,25 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartScreen(),
+                  ));
+            },
+            icon: Icon(
+              Icons.shopping_basket_outlined,
+              color: Colors.black,
+            ),
+            style: IconButton.styleFrom(
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
           IconButton(
             onPressed: () {},
             icon: Icon(
@@ -189,7 +210,58 @@ class _DetailScreenState extends State<DetailScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Product added to cart',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            content: Text(
+                              'Successfully added to your cart!',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: Colors.black,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 12, horizontal: 12),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Ok',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      cartModel.add(CartModel(
+                        name: widget.product.name,
+                        price: widget.product.price,
+                        image: widget.product.image,
+                        count: 1,
+                      ));
+                    },
                     child: Text(
                       'Add to Cart',
                       style: TextStyle(fontSize: 18, color: Colors.white),

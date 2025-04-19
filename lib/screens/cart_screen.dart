@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:nike_shoe_store/model/cart_model.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
@@ -33,12 +39,31 @@ class CartScreen extends StatelessWidget {
             ),
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                cartModel.clear();
+              });
+            },
+            icon: Icon(
+              Icons.clear_all,
+              color: Colors.black,
+            ),
+            style: IconButton.styleFrom(
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: 5,
+              itemCount: cartModel.length,
               itemBuilder: (context, index) => Container(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 width: mediaQuery.width,
@@ -55,7 +80,7 @@ class CartScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'data',
+                          cartModel[index].name,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
@@ -85,7 +110,7 @@ class CartScreen extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          '88.0',
+                          cartModel[index].price,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
@@ -105,7 +130,7 @@ class CartScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '1',
+                              cartModel[index].count.toString(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -134,7 +159,7 @@ class CartScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Image.asset(
-                        'assets/images/black1.png',
+                        cartModel[index].image,
                         width: 150,
                       ),
                     ),
