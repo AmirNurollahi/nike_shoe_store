@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nike_shoe_store/model/product_model.dart';
+import 'package:nike_shoe_store/screens/cart_screen.dart';
 import 'package:nike_shoe_store/screens/detail_screen.dart';
 
 class BeginScreen extends StatelessWidget {
@@ -447,11 +448,19 @@ class TopIconSection extends StatelessWidget {
               ),
             ),
           ),
-          Card(
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Icon(Icons.shopping_basket_outlined),
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CartScreen(),
+              ),
+            ),
+            child: Card(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Icon(Icons.shopping_basket_outlined),
+              ),
             ),
           ),
         ],
